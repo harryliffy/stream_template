@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+   
+</head>
+<body>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBShAMHsRshnW_si6SkJfFLwYCwRmncv0c&libraries=places"></script>
+    <script>
+//       var options = {
+//   enableHighAccuracy: true,
+//   timeout: 5000,
+//   maximumAge: 0
+// };
+// // First, get the user's location coordinates using the Geolocation API
+// if (navigator.geolocation) {
+//   navigator.geolocation.getCurrentPosition(showCity);
+// } else {
+//   console.log("Geolocation is not supported by this browser.");  
+// }
+
+// // Then, pass the location coordinates to a Geocoding API to get the city name
+// function showCity(position, options) { 
+//   const latitude = position.coords.latitude;
+//   const longitude = position.coords.longitude;
+
+//   // Make a request to a Geocoding API (e.g. Google Maps Geocoding API)
+//   const url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=AIzaSyBShAMHsRshnW_si6SkJfFLwYCwRmncv0c`;
+
+//   fetch(url)
+//     .then((response) => response.json())
+//     .then((data) => {
+//       // Parse the city name from the API response
+//       const city = data.results[0].address_components.find((component) =>
+//         component.types.includes("locality")
+//       ).long_name;
+
+//       console.log(`Your city is ${city}.`);
+//     })
+//     .catch((error) => console.log(error));
+// }
+
+
+
+// your_script.js
+
+// Function to get user's city using Google Geocoding API
+function getUserCity() {
+  // Check if the Geocoding API is available
+  if (typeof google === 'undefined' || typeof google.maps === 'undefined') {
+    console.error('Google Maps API is not loaded.');
+    return;
+  }
+
+  // Get user's current location using the browser's geolocation API
+  navigator.geolocation.getCurrentPosition(
+    function (position) {
+      // Get the latitude and longitude from the user's position
+      var latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+
+      // Create a Geocoder object
+      var geocoder = new google.maps.Geocoder();
+
+      // Use the Geocoder to get the city based on the latitude and longitude
+      geocoder.geocode({ 'location': latLng }, function (results, status) {
+        if (status === google.maps.GeocoderStatus.OK) {
+          // Parse the results to extract the city
+          var city = extractCityFromGeocodingResults(results);
+          console.log('User\'s City:', city);
+        } else {
+          console.error('Geocoding failed. Status:', status);
+        }
+      });
+    },
+    function (error) {
+      console.error('Error getting user location:', error.message);
+    }
+  );
+}
+
+// Helper function to extract city from Geocoding results
+function extractCityFromGeocodingResults(results) {
+  for (var i = 0; i < results.length; i++) {
+    for (var j = 0; j < results[i].address_components.length; j++) {
+      var types = results[i].address_components[j].types;
+      if (types.includes('locality') || types.includes('administrative_area_level_1')) {
+        return results[i].address_components[j].long_name;
+      }
+    }
+  }
+  return null;
+}
+
+// Call the function to get the user's city
+getUserCity();
+
+    </script>
+</body>
+</html>
