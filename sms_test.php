@@ -9,8 +9,8 @@ use Twilio\Rest\Client;
  function send_sms($full_name, $passcode, $user_phone){
     $c_date="14-Feb-2024";
     $live_link="https://atwlive.com";
-$sid    = "ACff698a6e9f34925ce945ff11fb5321a6"; 
-$token  = "fea799486b6d06bc3587d276532033d5"; 
+$sid    = "##############"; 
+$token  = "###################"; 
 
 $template =  "Hello ".$full_name.", \nYour ticket for Lets Be Honest By Dike Chukwumerije Live has been purchased \nTicket Code:".$passcode." \n  Date:".$c_date." \n Streaming link:".$live_link."" ;
 

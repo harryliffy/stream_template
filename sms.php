@@ -8,8 +8,8 @@
 
 
 // Your Account SID and Auth Token from twilio.com/console
-$sid = 'ACff698a6e9f34925ce945ff11fb5321a6';
-$token = 'fea799486b6d06bc3587d276532033d5';
+$sid = '#############';
+$token = '###############';
 
 // Use the client to do fun stuff like send text messages!
 $billing_phone="+2349037034192";

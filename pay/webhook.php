@@ -59,7 +59,7 @@ $core= new atwLive();
 
 require_once('vendor/autoload.php'); // Include the Stripe PHP library
 
-\Stripe\Stripe::setApiKey('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');
+\Stripe\Stripe::setApiKey('#######################');
 
 
 
